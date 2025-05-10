@@ -1,0 +1,101 @@
+Testing model: phi3_microsoft_instruct
+Model Loaded Successfully! 
+ Loading Time: 7.78 seconds
+Total GPU Memory Available: 12.00 GB
+GPU Memory allocated (used): 3.75 GB
+GPU Memory reserved (cached): 4.04 GB
+GPU Memory used after Model Load: 3.80 GB
+Inference Time: 8.79 seconds.
+GPU Memory allocated (used): 3.76 GB
+GPU Memory reserved (cached): 6.55 GB
+GPU Memory used after Inference: 6.08 GB
+user task: Hello What is your name?
+Agent result:I'm Phi, your AI assistant.
+
+Summary:
+Model load time: 7.78s
+task 1 inference time: 8.79s
+Model used 3.80 GB of GPU memory to load.
+Model used 6.08 GB of GPU memory to do inference.
+The total time it took is 16.58 seconds.
+Model is loaded in 8-bit quantization.
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Testing model: phi3_microsoft_instruct
+Model Loaded Successfully! 
+ Loading Time: 7.82 seconds
+Total GPU Memory Available: 12.00 GB
+GPU Memory allocated (used): 7.12 GB
+GPU Memory reserved (cached): 7.12 GB
+GPU Memory used after Model Load: 7.12 GB
+Inference Time: 3.48 seconds.
+GPU Memory allocated (used): 7.13 GB
+GPU Memory reserved (cached): 9.82 GB
+GPU Memory used after Inference: 9.13 GB
+user task: Hello What is your name?
+Agent result:I am Phi, an AI developed by Microsoft.
+
+Summary:
+Model load time: 7.82s
+task 1 inference time: 3.48s
+Model used 7.12 GB of GPU memory to load.
+Model used 9.13 GB of GPU memory to do inference.
+The total time it took is 11.30 seconds.
+Model is loaded in FP16 (half-precision).
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+######################################################################################################################################
+
+
+Testing model: Qwen2.5-Coder-7B-Instruct
+Model Loaded Successfully! 
+Loading Time: 25.77 seconds
+Total GPU Memory Available: 12.00 GB
+GPU Memory allocated (used): 8.11 GB
+GPU Memory reserved (cached): 8.29 GB
+GPU Memory used after Model Load: 8.11 GB
+Inference Time: 6.76 seconds.
+GPU Memory allocated (used): 8.14 GB
+GPU Memory reserved (cached): 10.01 GB
+GPU Memory used after Inference: 9.35 GB
+user task: Hello What is your name?
+Agent result:Assistant AI
+
+Summary:
+Model load time: 25.77s
+task 1 inference time: 6.76s
+Model used 8.11 GB of GPU memory to load.
+Model used 9.35 GB of GPU memory to do inference.
+The total time it took is 32.53 seconds.
+Model is loaded in 8-bit quantization.
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+Testing model: Qwen2.5-Coder-7B-Instruct
+Model Loaded Successfully! 
+ Loading Time: 10.73 seconds
+Total GPU Memory Available: 12.00 GB
+GPU Memory allocated (used): 14.19 GB
+GPU Memory reserved (cached): 14.23 GB
+GPU Memory used after Model Load: 14.19 GB
+Inference Time: 42.08 seconds.
+GPU Memory allocated (used): 14.20 GB
+GPU Memory reserved (cached): 14.72 GB
+GPU Memory used after Inference: 14.59 GB
+user task: Hello What is your name?
+Agent result:Assistant AI
+
+Summary:
+Model load time: 10.73s
+task 1 inference time: 42.08s
+Model used 14.19 GB of GPU memory to load.
+Model used 14.59 GB of GPU memory to do inference.
+The total time it took is 52.81 seconds.
+Model is loaded in FP16 (half-precision).
+------------------------------------------------------------------------------------------------------------------------------------
+
+
