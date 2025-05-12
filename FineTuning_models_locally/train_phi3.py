@@ -70,20 +70,31 @@ bnb_config = BitsAndBytesConfig(
 # -----------------------------
 # Sample Prompt Generator
 # -----------------------------
+# sample_prompts = [
+#     "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
+#     "Title: Fast Car vs Police Chase\nTags: fast, police, crash\nCategory: Entertainment\n"
+#     "Views: 2M\nDuration: 3:45\nVirality Drivers:\n",
+
+#     "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
+#     "Title: AI Can Now Paint Like Van Gogh\nTags: AI, art, machine learning\nCategory: Technology\n"
+#     "Views: 500K\nDuration: 7:10\nVirality Drivers:\n",
+
+#     "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
+#     "Title: World’s Quietest Room Test\nTags: science, experiment, sensory\nCategory: Education\n"
+#     "Views: 1.2M\nDuration: 5:00\nVirality Drivers:\n"
+# ]
 sample_prompts = [
-    "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
-    "Title: Fast Car vs Police Chase\nTags: fast, police, crash\nCategory: Entertainment\n"
-    "Views: 2M\nDuration: 3:45\nVirality Drivers:\n",
+    "Decide whether the following text contains a motivational, inspirational, or wisdom quote.\n\n"
+    "Text:\n[1.23s-9.23s] people give up right before they get what they always wanted\n\nAnswer:",
 
-    "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
-    "Title: AI Can Now Paint Like Van Gogh\nTags: AI, art, machine learning\nCategory: Technology\n"
-    "Views: 500K\nDuration: 7:10\nVirality Drivers:\n",
+    "Decide whether the following text contains a motivational, inspirational, or wisdom quote.\n\n"
+    "Text:\n[40.00s-45.00s] yeah, so the camera settings were off the whole time.\n\nAnswer:",
 
-    "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
-    "Title: World’s Quietest Room Test\nTags: science, experiment, sensory\nCategory: Education\n"
-    "Views: 1.2M\nDuration: 5:00\nVirality Drivers:\n"
+    "Decide whether the following text contains a motivational, inspirational, or wisdom quote.\n\n"
+    "Text:\n[14.00s-20.00s] Knowing yourself is the beginning of all wisdom.\n\nAnswer:",
 ]
 
+    
 def run_sample_prompts(model, tokenizer, prompts, label):
     logger.info(f"🧪 Generation test: {label}")
     model.eval()
@@ -147,15 +158,21 @@ peft_config = LoraConfig(
 # -----------------------------
 # Dataset Preprocessing
 # -----------------------------
+# def format_prompt(data):
+#     return (
+#         "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
+#         f"Title: {data['title']}\n"
+#         f"Tags: {', '.join(data['tags'])}\n"
+#         f"Category: {data['category']}\n"
+#         f"Views: {data['viewCount']}\n"
+#         f"Duration: {data['duration']}\n"
+#         "Virality Drivers:\n"
+#     )
 def format_prompt(data):
     return (
-        "Given the following YouTube video metadata, list the reasons why it might go viral:\n"
-        f"Title: {data['title']}\n"
-        f"Tags: {', '.join(data['tags'])}\n"
-        f"Category: {data['category']}\n"
-        f"Views: {data['viewCount']}\n"
-        f"Duration: {data['duration']}\n"
-        "Virality Drivers:\n"
+        "Decide whether the following text contains a motivational, inspirational, or wisdom quote.\n"
+        "If it does, state what kind and say to save it. If not, say it is not motivational.\n\n"
+        f"Text:\n{data['text']}\n\nAnswer:"
     )
 
 def convert_to_text(example):

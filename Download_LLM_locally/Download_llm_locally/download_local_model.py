@@ -459,8 +459,8 @@ def download_microsoft_Phi_4_mini_instruct():
     -scenarios where low latency and efficient performance are critical
     
     """
-    model_repo = "microsoft/Phi-4-mini-instruct "
-    local_dir = "./local_model/microsoft/microsoft/Phi-4-mini-instruct "
+    model_repo = "microsoft/Phi-4-mini-instruct"
+    local_dir = r"./"
     if not os.path.exists(local_dir):
         print(f"📥 Downloading {model_repo} into {local_dir}...")
         snapshot_download(
@@ -662,106 +662,106 @@ def download_microsoft_Mixtral_8x7B_instruct_v0_1():
 
 
 
-load_in_8bit = False  
-def setup_logger(model_id=""):
-    import logging
-    model_id = model_id.replace("/", "_").replace("\\", "_")
+# load_in_8bit = False  
+# def setup_logger(model_id=""):
+#     import logging
+#     model_id = model_id.replace("/", "_").replace("\\", "_")
 
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
+#     logger = logging.getLogger(__name__)
+#     logger.setLevel(logging.INFO)
 
-    if logger.hasHandlers():
-        logger.handlers.clear()
+#     if logger.hasHandlers():
+#         logger.handlers.clear()
 
 
-    log_file_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Model_general_extra\log_inference_loading\Model_loading_inference_general.txt"
+#     log_file_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Model_general_extra\log_inference_loading\Model_loading_inference_general.txt"
 
-    file_handler = logging.FileHandler(log_file_path, mode='a')
-    formatter = logging.Formatter('%(message)s')
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
+#     file_handler = logging.FileHandler(log_file_path, mode='a')
+#     formatter = logging.Formatter('%(message)s')
+#     file_handler.setFormatter(formatter)
+#     logger.addHandler(file_handler)
 
-    return logger
+#     return logger
 
-logger = setup_logger()
+# logger = setup_logger()
 
-def load_local_model(model_id):
-    torch.cuda.empty_cache()
-    torch.cuda.reset_peak_memory_stats()
-    start_time = time.time()
+# def load_local_model(model_id):
+#     torch.cuda.empty_cache()
+#     torch.cuda.reset_peak_memory_stats()
+#     start_time = time.time()
 
-    model = TransformersModel(
-        model_id=model_id,
-        device_map="cuda",
-        torch_dtype=torch.float16 if not load_in_8bit else None,
-        max_new_tokens=500,
-        load_in_8bit=load_in_8bit,
-    )
+#     model = TransformersModel(
+#         model_id=model_id,
+#         device_map="cuda",
+#         torch_dtype=torch.float16 if not load_in_8bit else None,
+#         max_new_tokens=500,
+#         load_in_8bit=load_in_8bit,
+#     )
 
-    load_duration = time.time() - start_time
+#     load_duration = time.time() - start_time
 
-    total_mem_gb = torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
-    mem_allocated_gb = torch.cuda.memory_allocated() / (1024 ** 3)
-    mem_reserved_gb = torch.cuda.memory_reserved() / (1024 ** 3)
-    mem_used_gb_after_load = torch.cuda.max_memory_allocated() / (1024 ** 3)
+#     total_mem_gb = torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
+#     mem_allocated_gb = torch.cuda.memory_allocated() / (1024 ** 3)
+#     mem_reserved_gb = torch.cuda.memory_reserved() / (1024 ** 3)
+#     mem_used_gb_after_load = torch.cuda.max_memory_allocated() / (1024 ** 3)
 
-    logger.info(f"Model Loaded Successfully! \n Loading Time: {load_duration:.2f} seconds")
-    logger.info(f"Total GPU Memory Available: {total_mem_gb:.2f} GB")
-    logger.info(f"GPU Memory allocated (used): {mem_allocated_gb:.2f} GB")
-    logger.info(f"GPU Memory reserved (cached): {mem_reserved_gb:.2f} GB")
-    logger.info(f"GPU Memory used after Model Load: {mem_used_gb_after_load:.2f} GB")
+#     logger.info(f"Model Loaded Successfully! \n Loading Time: {load_duration:.2f} seconds")
+#     logger.info(f"Total GPU Memory Available: {total_mem_gb:.2f} GB")
+#     logger.info(f"GPU Memory allocated (used): {mem_allocated_gb:.2f} GB")
+#     logger.info(f"GPU Memory reserved (cached): {mem_reserved_gb:.2f} GB")
+#     logger.info(f"GPU Memory used after Model Load: {mem_used_gb_after_load:.2f} GB")
 
-    return model, load_duration, mem_used_gb_after_load
+#     return model, load_duration, mem_used_gb_after_load
 
-def run_model_prompt(Model, user_task):
-    torch.cuda.reset_peak_memory_stats()
-    Agent = CodeAgent(
-        model=Model,
-        verbosity_level=1,
-        tools=[FinalAnswerTool(), DuckDuckGoSearchTool()]
-    )
-    start_time = time.time()
-    result = Agent.run(user_task)
-    inference_duration = time.time() - start_time
+# def run_model_prompt(Model, user_task):
+#     torch.cuda.reset_peak_memory_stats()
+#     Agent = CodeAgent(
+#         model=Model,
+#         verbosity_level=1,
+#         tools=[FinalAnswerTool(), DuckDuckGoSearchTool()]
+#     )
+#     start_time = time.time()
+#     result = Agent.run(user_task)
+#     inference_duration = time.time() - start_time
 
-    mem_allocated_gb = torch.cuda.memory_allocated() / (1024 ** 3)
-    mem_reserved_gb = torch.cuda.memory_reserved() / (1024 ** 3)
-    mem_used_gb_after_inference = torch.cuda.max_memory_allocated() / (1024 ** 3)
+#     mem_allocated_gb = torch.cuda.memory_allocated() / (1024 ** 3)
+#     mem_reserved_gb = torch.cuda.memory_reserved() / (1024 ** 3)
+#     mem_used_gb_after_inference = torch.cuda.max_memory_allocated() / (1024 ** 3)
 
-    logger.info(f"Inference Time: {inference_duration:.2f} seconds.")
-    logger.info(f"GPU Memory allocated (used): {mem_allocated_gb:.2f} GB")
-    logger.info(f"GPU Memory reserved (cached): {mem_reserved_gb:.2f} GB")
-    logger.info(f"GPU Memory used after Inference: {mem_used_gb_after_inference:.2f} GB")
-    logger.info(f"user task: {user_task}")
-    logger.info(f"Agent result:{result}")
+#     logger.info(f"Inference Time: {inference_duration:.2f} seconds.")
+#     logger.info(f"GPU Memory allocated (used): {mem_allocated_gb:.2f} GB")
+#     logger.info(f"GPU Memory reserved (cached): {mem_reserved_gb:.2f} GB")
+#     logger.info(f"GPU Memory used after Inference: {mem_used_gb_after_inference:.2f} GB")
+#     logger.info(f"user task: {user_task}")
+#     logger.info(f"Agent result:{result}")
 
-    return result, inference_duration, mem_used_gb_after_inference
+#     return result, inference_duration, mem_used_gb_after_inference
 
-def test_inference_and_model_loading_time():
-    model_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Qwen\Qwen2.5-Coder-7B-Instruct"
-    clean_model_name = "Qwen2.5-Coder-7B-Instruct"
-    global logger
-    logger = setup_logger(clean_model_name)
-    logger.info(f"Testing model: {clean_model_name}")
+# def test_inference_and_model_loading_time():
+#     model_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Qwen\Qwen2.5-Coder-7B-Instruct"
+#     clean_model_name = "Qwen2.5-Coder-7B-Instruct"
+#     global logger
+#     logger = setup_logger(clean_model_name)
+#     logger.info(f"Testing model: {clean_model_name}")
     
-    user_task1 = "Hello What is your name?"
+#     user_task1 = "Hello What is your name?"
     
-    model, load_time, mem_after_load = load_local_model(model_path)
-    result1, inference_time1, mem_after_inference = run_model_prompt(model, user_task1)
-    del model
-    torch.cuda.empty_cache()
-    gc.collect()
+#     model, load_time, mem_after_load = load_local_model(model_path)
+#     result1, inference_time1, mem_after_inference = run_model_prompt(model, user_task1)
+#     del model
+#     torch.cuda.empty_cache()
+#     gc.collect()
 
-    return {
-        "load_time": load_time,
-        "mem_after_load": mem_after_load,
-        "mem_after_inference": mem_after_inference,
-        "task1": {
-            "prompt": user_task1,
-            "inference_time": inference_time1,
-            "result": result1
-        }
-    }
+#     return {
+#         "load_time": load_time,
+#         "mem_after_load": mem_after_load,
+#         "mem_after_inference": mem_after_inference,
+#         "task1": {
+#             "prompt": user_task1,
+#             "inference_time": inference_time1,
+#             "result": result1
+#         }
+#     }
 
 if __name__ == "__main__":
     torch.cuda.empty_cache()
@@ -779,6 +779,6 @@ if __name__ == "__main__":
     # logger.info("------------------------------------------------------------------------------------------------------------------------------------\n\n")
     # torch.cuda.empty_cache()
     # gc.collect()
-    download_microsoft_microsoft_Phi_4_mini_instruct_onnx()
+    download_microsoft_Phi_3_mini_128k_instruct()
 
 
