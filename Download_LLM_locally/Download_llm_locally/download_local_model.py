@@ -45,6 +45,39 @@ def download_deepseek_coder_7b_instruct():
     else:
         print(f"✅ Model already exists at {local_dir}, skipping download.")
 
+def download_Qwen2_VL_7B_INSTRUCT():
+    """Advanced code generation and completion.
+    Model Inseight---->
+    ------------------------------------------------------------------------
+    Architecture: 
+    -Naive Dynamic Resolution: Unlike before, Qwen2-VL can handle arbitrary image resolutions, mapping them into a dynamic number of visual tokens, offering a more human-like visual processing experience.
+    -Multimodal Rotary Position Embedding (M-ROPE): Decomposes positional embedding into parts to capture 1D textual, 2D visual, and 3D video positional information, enhancing its multimodal processing capabilities.
+    
+    Model Features ----> 
+    ------------------------------------------------------------------------
+    -SoTA understanding of images of various resolution & ratio: Qwen2-VL achieves state-of-the-art performance on visual understanding benchmarks, including MathVista, DocVQA, RealWorldQA, MTVQA, etc.
+    -Understanding videos of 20min+: Qwen2-VL can understand videos over 20 minutes for high-quality video-based question answering, dialog, content creation, etc.
+    -Agent that can operate your mobiles, robots, etc.: with the abilities of complex reasoning and decision making, Qwen2-VL can be integrated with devices like mobile phones, robots, etc., for automatic operation based on visual environment and text instructions.
+    -Multilingual Support: to serve global users, besides English and Chinese, Qwen2-VL now supports the understanding of texts in different languages inside images, including most European languages, Japanese, Korean, Arabic, Vietnamese, etc.
+    Ideal Use Cases: 
+    ------------------------------------------------------------------------
+
+    """
+    model_repo = "Qwen/Qwen2-VL-7B-Instruct"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models/QWEN-VL-6B-INSTRUCT"
+
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ Qwen2-VL-7B-Instruct downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
+
 
 
 
@@ -431,6 +464,79 @@ def download_microsoft_Phi_3_mini_128k_instruct():
 
 
 
+def download_microsoft_Mistal_7B_instruct_v0_3():
+    """Lightweight model for instruction-following tasks with long-context support.
+    Model Inseight---->
+    ------------------------------------------------------------------------
+    -Model Size: 3.8 billion parameters.
+    -Context Length: 128K tokens.
+    -Architecture: Dense decoder-only Transformer model fine-tuned with Supervised Fine-Tuning (SFT) and Direct Preference Optimization (DPO) to ensure alignment with human preferences and safety guidelines.
+    -Training Data: Utilized the Phi-3 datasets, which include synthetic data and filtered publicly available website data, focusing on high-quality and reasoning-dense content. 
+   
+    Model Features ----> 
+    ------------------------------------------------------------------------
+    -Trained on synthetic and filtered public data focusing on high-quality, reasoning-dense content.
+    -Supports long-context tasks in resource-constrained environments.
+
+    Ideal Use Cases: 
+    ------------------------------------------------------------------------
+    -Ideal Use Cases: Instruction-following tasks requiring long-context understanding in environments with limited resources
+
+    """
+    model_repo = "mistralai/Mistral-7B-Instruct-v0.3"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models/mistralai/Mistral-7B-Instruct-v0.3"
+
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=True
+        )
+        print(f"✅ microsoft/Phi-3-mini-128k-instruct downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
+
+
+
+from huggingface_hub import snapshot_download
+import os
+
+def download_Qwen_2_5_7B_Instruct():
+    """
+    Qwen2.5-7B-Instruct is a high-quality, instruction-tuned language model designed for strong reasoning,
+    tool-use tasks, and natural conversational alignment. Ideal for analytical and structured tasks like quote extraction.
+
+    Model Insight:
+    ------------------------------------------------------------------------
+    - Model Size: 7.6 billion parameters
+    - Context Length: 32K tokens
+    - Architecture: Transformer with RoPE, SwiGLU, RMSNorm, attention QKV bias, tied embeddings
+    - Optimized for instruction-following and reasoning with minimal hallucination
+
+    Ideal Use Cases:
+    ------------------------------------------------------------------------
+    - Motivational quote detection
+    - Long-form instruction-following tasks
+    - Text analysis, summarization, reasoning with tools
+
+    """
+    model_repo = "Qwen/Qwen2.5-7B-Instruct"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models/Qwen/Qwen2.5-7B-Instruct"
+
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ {model_repo} downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
+
 
 
 
@@ -777,8 +883,6 @@ if __name__ == "__main__":
     # logger.info(f"The total time it took is {total_time:.2f} seconds.")
     # logger.info(f"Model is loaded in {'8-bit quantization' if load_in_8bit else 'FP16 (half-precision)'}.")
     # logger.info("------------------------------------------------------------------------------------------------------------------------------------\n\n")
-    # torch.cuda.empty_cache()
-    # gc.collect()
-    download_microsoft_Phi_3_mini_128k_instruct()
-
-
+    torch.cuda.empty_cache()
+    gc.collect()
+    download_Qwen2_VL_7B_INSTRUCT()
