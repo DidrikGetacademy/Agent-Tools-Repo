@@ -638,6 +638,25 @@ def download_microsoft_Phi_4_multimodal_instruct():
 
 
 
+def download_Qwen_Qwen2_5_VL_7B_Instruct():
+
+    model_repo = "Qwen/Qwen2.5-VL-7B-Instruct"
+    local_dir = "./local_model/Qwen/Qwen2.5-VL-7B-Instruct"
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ Qwen/Qwen2.5-VL-7B-Instruct downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
+
+
+
+
 
 
 
@@ -885,4 +904,4 @@ if __name__ == "__main__":
     # logger.info("------------------------------------------------------------------------------------------------------------------------------------\n\n")
     torch.cuda.empty_cache()
     gc.collect()
-    download_Qwen2_VL_7B_INSTRUCT()
+    download_microsoft_Phi_4_multimodal_instruct()
