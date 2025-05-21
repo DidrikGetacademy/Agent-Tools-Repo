@@ -816,6 +816,22 @@ def download_qwen_3b_instruct():
     else:
         print(f"✅ Model already exists at {local_dir}, skipping download.")
 
+
+def download_SmolVLM_instruct():
+    model_repo = "HuggingFaceTB/SmolVLM-Instruct"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models\SmolVLM-Instruct"
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ SmolVLM-Instructdownloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
+
 # load_in_8bit = False  
 # def setup_logger(model_id=""):
 #     import logging
@@ -933,4 +949,4 @@ if __name__ == "__main__":
     # logger.info("------------------------------------------------------------------------------------------------------------------------------------\n\n")
     torch.cuda.empty_cache()
     gc.collect()
-    download_qwen_3b_instruct()
+    download_SmolVLM_instruct()
