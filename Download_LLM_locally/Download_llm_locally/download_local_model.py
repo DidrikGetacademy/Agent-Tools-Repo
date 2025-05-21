@@ -785,7 +785,36 @@ def download_microsoft_Mixtral_8x7B_instruct_v0_1():
 
 
 
+def download_phi_3_mini_instruct():
+    model_repo = "jncraton/Phi-3-mini-4k-instruct-20240701-ct2-int8"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models\Phi3_mini_8int_ct2"
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ jncraton/Phi-3-mini-4k-instruct-20240701-ct2-int8 downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
 
+
+def download_qwen_3b_instruct():
+    model_repo = "Qwen/Qwen2.5-3B-Instruct"
+    local_dir = r"C:\Users\didri\Desktop\LLM-models\Qwen/Qwen_3B"
+    if not os.path.exists(local_dir):
+        print(f"📥 Downloading {model_repo} into {local_dir}...")
+        snapshot_download(
+            repo_id=model_repo,
+            local_dir=local_dir,
+            resume_download=True,
+            local_dir_use_symlinks=False
+        )
+        print(f"✅ Qwen/Qwen2.5-3B-Instruct downloaded successfully.")
+    else:
+        print(f"✅ Model already exists at {local_dir}, skipping download.")
 
 # load_in_8bit = False  
 # def setup_logger(model_id=""):
@@ -799,7 +828,7 @@ def download_microsoft_Mixtral_8x7B_instruct_v0_1():
 #         logger.handlers.clear()
 
 
-#     log_file_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Model_general_extra\log_inference_loading\Model_loading_inference_general.txt"
+#     log_file_path = r""
 
 #     file_handler = logging.FileHandler(log_file_path, mode='a')
 #     formatter = logging.Formatter('%(message)s')
@@ -863,7 +892,7 @@ def download_microsoft_Mixtral_8x7B_instruct_v0_1():
 #     return result, inference_duration, mem_used_gb_after_inference
 
 # def test_inference_and_model_loading_time():
-#     model_path = r"C:\Users\didri\Desktop\Programmering\VideoEnchancer program\local_model\Qwen\Qwen2.5-Coder-7B-Instruct"
+#     model_path = r""
 #     clean_model_name = "Qwen2.5-Coder-7B-Instruct"
 #     global logger
 #     logger = setup_logger(clean_model_name)
@@ -904,4 +933,4 @@ if __name__ == "__main__":
     # logger.info("------------------------------------------------------------------------------------------------------------------------------------\n\n")
     torch.cuda.empty_cache()
     gc.collect()
-    download_microsoft_Phi_4_multimodal_instruct()
+    download_qwen_3b_instruct()
